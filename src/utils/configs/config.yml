@@ -1,0 +1,19 @@
+llms:
+  together_api_key: ${TOGETHER_API_KEY}
+
+  classifier_emotion_llm:
+    model: ""
+    temperature: 0
+    max_tokens: 50
+
+  suzy:
+    model: ""
+    temperature: 0.6
+    max_tokens: 400
+
+db:
+  db_name: ${DB_NAME}
+  db_password: ${DB_PASSWORD}
+  db_host: ${DB_HOST}
+  db_port: ${DB_PORT}
+  db_user: ${DB_USER}

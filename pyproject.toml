@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "suzy-ai-pet"
+version = "1.0.0"
+description = "Эмоциональный AI-питомец с долгосрочной памятью и анализом эмоций"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "KairatZhaksylykov", email = "zhaksylykov.k06@gmail.com"}
+]
+keywords = ["ai", "chatbot", "emotion", "memory", "langchain", "langgraph"]
+
+dependencies = [
+    "langchain>=0.1.0",
+    "langchain-community>=0.0.10",
+    "langchain-together>=0.0.1",
+    "langgraph>=0.0.20",
+    "pydantic>=2.0.0",
+    "uvicorn>=0.20.0",
+    "fastapi>=0.100.0",
+    "psycopg2-binary>=2.9.0",
+    "pgvector>=0.2.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0",
+    "aiogram>=3.0.0",
+]
+
+[project.scripts]
+suzy-ai-pet = "src.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yml", "*.yaml", "*.json"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_first_party = ["src"]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+select = ["E", "W", "F", "I", "B", "C4", "UP"]
+ignore = ["E501", "B008", "C901"]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.isort]
+known-first-party = ["src"]

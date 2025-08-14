@@ -1,0 +1,11 @@
+langchain
+langchain_community
+langchain_together
+langgraph
+pydantic
+uvicorn
+fastapi
+psycopg2-binary
+pgvector
+python-dotenv
+pyyaml

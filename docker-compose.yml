@@ -1,0 +1,50 @@
+#Пока что компоус для совершенного проекта.Советую не использовать и проверить исходный код на требование
+
+
+
+version: '3.8'
+
+services:
+  # PostgreSQL с pgvector
+  postgres:
+    image: pgvector/pgvector:pg15
+    container_name: suzy-postgres
+    environment:
+      POSTGRES_DB: lt_memory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: suzy_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Suzy AI Pet приложение
+  suzy-app:
+    build: .
+    container_name: suzy-ai-pet
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=lt_memory
+      - DB_USER=postgres
+      - DB_PASSWORD=suzy_password
+      - TOGETHER_API_KEY=${TOGETHER_API_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

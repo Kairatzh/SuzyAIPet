@@ -1,0 +1,27 @@
+#Виртуальное окружение
+.venv/
+
+
+#Python кэш
+__pycache__/
+*/__pycache__/
+**/__pycache__/
+*.pyc
+
+#IDE
+.idea/
+
+
+#Секретные файлы
+.env
+
+
+
+#Логи
+*.log
+
+
+
+
+#db
+*.dump
